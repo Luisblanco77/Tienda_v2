@@ -18,11 +18,9 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @Configuration
 
 public class ProjectConfig implements WebMvcConfigurer {
-  // Los siguientes metodos son utilizados para el tema de la internacionalizacion.
-    
+    // Los siguientes metodos son utilizados para el tema de la internacionalizacion.
+
     //LocaleResolver ubica informacion del browser local del usuario y fija la informacion a desplegar.
-    
-    
     @Bean
     public LocaleResolver localeResolver() {
         var slr = new SessionLocaleResolver();
@@ -40,28 +38,30 @@ public class ProjectConfig implements WebMvcConfigurer {
         return slr;
     }
 //Define cual sera la variable que "cambia" el odioma de los textos.
+
     @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor(){
+    public LocaleChangeInterceptor localeChangeInterceptor() {
         var lci = new LocaleChangeInterceptor();
         lci.setParamName("lang");
         return lci;
     }
-          
+
     //Se agrega un "interceptor" para poder hacer el cambio de idioma de inmediato.
     @Override
-    public void addInterceptors(InterceptorRegistry registro){
+    public void addInterceptors(InterceptorRegistry registro) {
         registro.addInterceptor(localeChangeInterceptor());
-    
+
     }
+
     //Se utilizara para recuperar los textos dentro de java segun el idioma.
     @Bean("messageSource")
-    public MessageSource messageSource(){
+    public MessageSource messageSource() {
         ResourceBundleMessageSource bundleMessageSource
                 = new ResourceBundleMessageSource();
         bundleMessageSource.setBasename("messages");
         bundleMessageSource.setDefaultEncoding("UTF-8");
-                
+
         return bundleMessageSource;
     }
-    
+
 }
