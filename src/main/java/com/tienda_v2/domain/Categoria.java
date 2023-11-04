@@ -26,7 +26,7 @@ public class Categoria implements Serializable {
 
     private String descripcion;
     private String rutaImagen;
-    private boolean activo;
+    private Boolean activo;
 
     public Categoria() {
     }
